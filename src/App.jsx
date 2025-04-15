@@ -26,8 +26,8 @@ const App = () => {
   if(/[A-Z]/.test(pass)) fuerza++;
   if(/[\d]/.test(pass)) fuerza++;
 
-  if(fuerza <= 2) return 'Contraseña poco segura.';
-  if(fuerza === 3 || fuerza === 4) return 'Contraseña segura';
+  if(fuerza === 1) return 'Contraseña poco segura.';
+  if(fuerza === 2 || fuerza === 3) return 'Contraseña segura';
   if(fuerza > 4) return 'Contraseña muy segura';
   };
 
@@ -55,13 +55,13 @@ const Ingresousuario = ({ user, onChange }) => {
   );
 };
 
-const Ingresopass = ({pass, visibilidad, actualizapass, mostrarpass}) => {
+const Ingresopass = ({pass, mostrar, onChange, visibilidad}) => {
   return(
     <div className='divingreso'>
       <input
-      type={mostrarpass ? 'text' : 'password'}
+      type={mostrar ? 'text' : 'password'}
       value={pass}
-      onChange={actualizapass}
+      onChange={onChange}
       className="inputdatos"
       placeholder="Ingresa tu Contraseña"
       />
