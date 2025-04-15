@@ -25,7 +25,6 @@ const App = () => {
   if(/[a-z]/.test(pass)) fuerza++;
   if(/[A-Z]/.test(pass)) fuerza++;
   if(/[\d]/.test(pass)) fuerza++;
-  if(/[^A-Za-Z0-9]/.test(pass)) fuerza++;
 
   if(fuerza <= 2) return 'Contraseña poco segura.';
   if(fuerza === 3 || fuerza === 4) return 'Contraseña segura';
