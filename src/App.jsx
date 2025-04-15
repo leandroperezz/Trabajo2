@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { use } from 'react';
 
-function Contraseña(){
+const App = () => {
   const [user, setuser] = useState('');
   const[pass, setpass] = useState('');
   const[mostrar, setmostrar] = useState(false);
@@ -29,7 +28,7 @@ function Contraseña(){
   if(/[^A-Za-Z0-9]/.test(pass)) fuerza++;
 
   if(fuerza <= 2) return 'Contraseña poco segura.';
-  if(fuerza === 3 || fuerza === 4) return 'Constraseña segura';
+  if(fuerza === 3 || fuerza === 4) return 'Contraseña segura';
   if(fuerza > 4) return 'Contraseña muy segura';
   };
 
