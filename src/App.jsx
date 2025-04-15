@@ -73,9 +73,30 @@ const Ingresopass = ({pass, mostrar, onChange, visibilidad}) => {
 };
 
 const Indicafuerza = ({ fuerza }) => {
+
+  if(!fuerza) return null;
+
+  let color = '';
+  let mensaje = '';
+
+  switch (fuerza) {
+    case 'poco':
+      color = 'text-red-500';
+      mensaje = 'Contraseña poco segura';
+      break;
+    case 'media':
+      color = 'text-yellow-500';
+      mensaje = 'Contraseña segura';
+      break;
+    case 'alta':
+      color = 'text-green-500';
+      mensaje = 'Contraseña muy segura';
+      break;
+  }
+
   return(
     <div>
-      <p className='mostrarfuerza'>Fuerza: <span>{fuerza}</span></p>
+      <p className={`"mostrarfuerza ${color}`}>Fuerza: <span>{fuerza}</span></p>
     </div>
   );
 };
