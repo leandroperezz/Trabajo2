@@ -26,9 +26,7 @@ const App = () => {
   if(/[A-Z]/.test(pass)) fuerza++;
   if(/[\d]/.test(pass)) fuerza++;
 
-  if(fuerza === 1) return 'Contraseña poco segura.';
-  if(fuerza === 2 || fuerza === 3) return 'Contraseña segura';
-  if(fuerza > 4) return 'Contraseña muy segura';
+  return fuerza;
   };
 
   return(
@@ -72,28 +70,26 @@ const Ingresopass = ({pass, mostrar, onChange, visibilidad}) => {
   );
 };
 
-const Indicafuerza = ({ fuerza }) => {
+const Indicafuerza = ({ strength }) => {
 
-  if(!fuerza) return null;
+  if(!strength) return null;
 
   let color = '';
   let mensaje = '';
 
-  switch (fuerza) {
-    case 'Contraseña poco segura.':
-      color = 'text-red-500';
-      mensaje = 'Contraseña poco segura';
-      break;
-    case 'Contraseña segura':
-      color = 'text-yellow-500';
-      mensaje = 'Contraseña segura';
-      break;
-    case 'Contraseña muy segura':
-      color = 'text-green-500';
-      mensaje = 'Contraseña muy segura';
-      break;
+  if (strength === 1) {
+    color = 'text-red-500';
+    mensaje = 'Contraseña poco segura';
+  } 
+  else if (strength === 2 || strength === 3) {
+    color = 'text-yellow-500';
+    mensaje = 'Contraseña segura';
+  } 
+  else if (strength >= 4) {
+    color = 'text-green-500';
+    mensaje = 'Contraseña muy segura';
   }
-
+  
   return(
     <div>
       <p className={`"mostrarfuerza ${color}`}>Fuerza: <span>{fuerza}</span></p>
