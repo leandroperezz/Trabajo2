@@ -19,14 +19,17 @@ const App = () => {
 
   const evaluarfuerza = (pass) => {
   let fuerza = 0;
-  if(!pass) return '';
+  if(!pass) return 'ninguna';
 
   if(pass.length >= 8) fuerza++;
   if(/[a-z]/.test(pass)) fuerza++;
   if(/[A-Z]/.test(pass)) fuerza++;
   if(/[\d]/.test(pass)) fuerza++;
 
-  return fuerza;
+  if (fuerza <= 2) return 'poco';
+  if (fuerza === 3 || fuerza === 4) return 'media';
+  return 'alta';
+
   };
 
   return(
@@ -34,7 +37,7 @@ const App = () => {
       <h1 className='h1registro'>Registre su cuenta.</h1>
       <Ingresousuario user={user} onChange={actualizauser} />
       <Ingresopass pass={pass} mostrar={mostrar} onChange={actualizapass} visibilidad={mostrarpass} />
-      <Indicafuerza strength={evaluarfuerza(pass)} />
+      <Indicafuerza fuerza={fuerza} />
     </div>
   );
 };
@@ -70,29 +73,30 @@ const Ingresopass = ({pass, mostrar, onChange, visibilidad}) => {
   );
 };
 
-const Indicafuerza = ({ strength }) => {
+const Indicafuerza = ({ fuerza }) => {
 
-  if(!strength) return null;
+  if (fuerza === 'ninguna') return null;
 
-  let color = '';
   let mensaje = '';
 
-  if (strength === 1) {
-    color = 'text-red-500';
-    mensaje = 'Contraseña poco segura';
-  } 
-  else if (strength === 2 || strength === 3) {
-    color = 'text-yellow-500';
-    mensaje = 'Contraseña segura';
-  } 
-  else if (strength >= 4) {
-    color = 'text-green-500';
-    mensaje = 'Contraseña muy segura';
+  switch (fuerza) {
+    case 'poco':
+      mensaje = 'Contraseña poco segura';
+      break;
+    case 'media':
+      mensaje = 'Contraseña segura';
+      break;
+    case 'alta':
+      mensaje = 'Contraseña muy segura';
+      break;
+    default:
+      mensaje = '';
+      break;
   }
   
   return(
     <div>
-      <p className={`"mostrarfuerza ${color}`}>Fuerza: <span>{fuerza}</span></p>
+      <p className={'mostrarfuerza'}>Fuerza: <span>{mensaje}</span></p>
     </div>
   );
 };
