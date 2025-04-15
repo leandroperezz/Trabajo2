@@ -37,7 +37,7 @@ const App = () => {
       <h1 className='h1registro'>Registre su cuenta.</h1>
       <Ingresousuario user={user} onChange={actualizauser} />
       <Ingresopass pass={pass} mostrar={mostrar} onChange={actualizapass} visibilidad={mostrarpass} />
-      <Indicafuerza fuerza={fuerza} />
+      <Indicafuerza fuerza={evaluarfuerza(pass)} />
     </div>
   );
 };
