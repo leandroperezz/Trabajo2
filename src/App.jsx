@@ -78,19 +78,24 @@ const Indicafuerza = ({ fuerza }) => {
   if (fuerza === 'ninguna') return null;
 
   let mensaje = '';
+  let color = '';
 
   switch (fuerza) {
     case 'poco':
       mensaje = 'Contraseña poco segura';
+      color = 'text-red-600';
       break;
     case 'media':
       mensaje = 'Contraseña segura';
+      color = 'text-yellow-600';
       break;
     case 'alta':
       mensaje = 'Contraseña muy segura';
+      color = 'text-green-600';
       break;
     default:
       mensaje = '';
+      color = '';
       break;
   }
   
