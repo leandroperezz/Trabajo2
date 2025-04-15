@@ -80,15 +80,15 @@ const Indicafuerza = ({ fuerza }) => {
   let mensaje = '';
 
   switch (fuerza) {
-    case 'poco':
+    case 'Contraseña poco segura.':
       color = 'text-red-500';
       mensaje = 'Contraseña poco segura';
       break;
-    case 'media':
+    case 'Contraseña segura':
       color = 'text-yellow-500';
       mensaje = 'Contraseña segura';
       break;
-    case 'alta':
+    case 'Contraseña muy segura':
       color = 'text-green-500';
       mensaje = 'Contraseña muy segura';
       break;
