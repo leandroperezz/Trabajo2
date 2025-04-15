@@ -65,8 +65,8 @@ const Ingresopass = ({pass, mostrar, onChange, visibilidad}) => {
       className="inputdatos"
       placeholder="Ingresa tu Contraseña"
       />
-    <button onClick={mostrarpass} className='mostrarpass'>
-      {visibilidad ? 'Ocultar' : 'Mostrar'} contraseña
+    <button onClick={visibilidad} className='mostrarpass'>
+      {mostrar ? 'Ocultar' : 'Mostrar'} contraseña
     </button>
     </div>
   );
