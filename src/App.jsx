@@ -4,7 +4,6 @@ const App = () => {
   const [user, setuser] = useState('');
   const[pass, setpass] = useState('');
   const[mostrar, setmostrar] = useState(false);
-  const [copia, setcopia] = useState('');
 
   const actualizauser = (e) => {
     setuser(e.target.value);
@@ -37,11 +36,8 @@ const App = () => {
     <div className='divregistro'>
       <h1 className='h1registro'>Registre su cuenta.</h1>
       <Ingresousuario user={user} onChange={actualizauser} />
-      <Ingresopass pass={pass} mostrar={mostrar} onChange={actualizapass} visibilidad={mostrarpass} mostrarcopia={setCopia}/>
+      <Ingresopass pass={pass} mostrar={mostrar} onChange={actualizapass} visibilidad={mostrarpass} />
       <Indicafuerza fuerza={evaluarfuerza(pass)} />
-      <button className="botonregistro">
-        Registrar usuario
-      </button>
     </div>
   );
 };
@@ -61,19 +57,6 @@ const Ingresousuario = ({ user, onChange }) => {
 };
 
 const Ingresopass = ({pass, mostrar, onChange, visibilidad}) => {
-
-  const Copiarpass = () => {
-    navigator.clipboard.writeText(pass)
-      .then(() => {
-        mostrarcopia('¡Contraseña copiada!');
-        setTimeout(() => mostrarcopia(''), 3000);
-      })
-      .catch(() => {
-        mostrarcopia('No se pudo copiar la contraseña');
-        setTimeout(() => mostrarcopia(''), 3000);
-      });
-  };
-
   return(
     <div className='divingreso'>
       <input
@@ -86,9 +69,6 @@ const Ingresopass = ({pass, mostrar, onChange, visibilidad}) => {
     <button onClick={visibilidad} className='mostrarpass'>
       {mostrar ? 'Ocultar' : 'Mostrar'} contraseña
     </button>
-    <button onClick={copiarContraseña} className="mostrarpassw">
-          Copiar contraseña
-        </button>
     </div>
   );
 };
