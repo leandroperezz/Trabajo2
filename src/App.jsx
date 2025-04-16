@@ -21,13 +21,13 @@ const App = () => {
   let fuerza = 0;
   if(!pass) return 'ninguna';
 
-  if(pass.length >= 8) fuerza++;
+  if(pass.length >= 8) fuerza = 3;
   if(/[a-z]/.test(pass)) fuerza++;
   if(/[A-Z]/.test(pass)) fuerza++;
   if(/[\d]/.test(pass)) fuerza++;
 
-  if (fuerza === 1) return 'poco';
-  if (fuerza === 2 || fuerza === 3) return 'media';
+  if (fuerza <= 3) return 'poco';
+  if (fuerza === 4 || fuerza === 5) return 'media';
   return 'alta';
 
   };
@@ -101,7 +101,7 @@ const Indicafuerza = ({ fuerza }) => {
   
   return(
     <div>
-      <p className={'mostrarfuerza'}>Fuerza: <span>{mensaje}</span></p>
+      <p className={`font-semibold ${color}`}>Fuerza: <span>{mensaje}</span></p>
     </div>
   );
 };
