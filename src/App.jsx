@@ -17,6 +17,34 @@ const App = () => {
     setmostrar(!mostrar);
   };
 
+  const generarpassaleatorio = () => {
+    const longitudMinima = 8;
+    const caracteresMayusculas = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const caracteresMinusculas = 'abcdefghijklmnopqrstuvwxyz';
+    const caracteresNumeros = '0123456789';
+    const todosLosCaracteres = caracteresMayusculas + caracteresMinusculas + caracteresNumeros;
+
+    let nuevaContraseña = '';
+    const requisitos = [caracteresMayusculas, caracteresMinusculas, caracteresNumeros];
+
+    // Se asuegura que al menos un carácter de cada requisito esté presente
+    for (let i = 0; i < requisitos.length; i++) {
+      const requisito = requisitos[i];
+      nuevaContraseña += requisito.charAt(Math.floor(Math.random() * requisito.length));
+    }
+
+    // Genera el resto de la contraseña aleatoriamente
+    const longitudRestante = Math.max(0, longitudMinima - nuevaContraseña.length);
+    for (let i = 0; i < longitudRestante; i++) {
+      nuevaContraseña += todosLosCaracteres.charAt(Math.floor(Math.random() * todosLosCaracteres.length));
+    }
+
+    // Baraja la contraseña para que los caracteres obligatorios no estén al principio
+    nuevaContraseña = nuevaContraseña.split('').sort(() => Math.random() - 0.5).join('');
+
+    setpass(nuevaContraseña);
+  };
+
   const evaluarfuerza = (pass) => {
   let fuerza = 0;
   if(!pass) return 'ninguna';
@@ -32,6 +60,21 @@ const App = () => {
 
   };
 
+  const copiarpass = () => {
+    if (pass) {
+      navigator.clipboard.writeText(pass)
+        .then(() => {
+          alert('Contraseña copiada al portapapeles!');
+        })
+        .catch(err => {
+          console.error('Error al copiar la contraseña: ', err);
+          alert('No se pudo copiar la contraseña.');
+        });
+    } else {
+      alert('No hay contraseña para copiar.');
+    }
+  };
+
   return(
     <div className='divregistro'>
       <h1 className='h1registro'>Registre su cuenta.</h1>
@@ -39,6 +82,8 @@ const App = () => {
       <Ingresopass pass={pass} mostrar={mostrar} onChange={actualizapass} visibilidad={mostrarpass} />
       <Indicafuerza fuerza={evaluarfuerza(pass)} />
       <button className="botonregistro">Registrar usuario</button>
+      <button className="botoncopiar" onClick={copiarpass}>Copiar Contraseña</button>
+      <button className="boton-generar-pass" onClick={generarpassaleatorio}>Generar Contraseña</button>
     </div>
   );
 };
@@ -79,30 +124,30 @@ const Indicafuerza = ({ fuerza }) => {
   if (fuerza === 'ninguna') return null;
 
   let mensaje = '';
-  let color = '';
+  let claseColor = '';
 
   switch (fuerza) {
     case 'poco':
       mensaje = 'Contraseña poco segura';
-      color = 'text-red-600';
+      claseColor = 'fuerza-poco';
       break;
     case 'media':
       mensaje = 'Contraseña segura';
-      color = 'text-yellow-600';
+      claseColor = 'fuerza-media';
       break;
     case 'alta':
       mensaje = 'Contraseña muy segura';
-      color = 'text-green-600';
+      claseColor = 'fuerza-alta';
       break;
     default:
       mensaje = '';
-      color = '';
+      claseColor = '';
       break;
   }
-  
-  return(
-    <div>
-      <p className={`font-semibold ${color}`}>Fuerza: <span>{mensaje}</span></p>
+
+  return (
+    <div className="fuerzapass">
+      <p className={`font-semibold ${claseColor}`}>Fuerza: <span>{mensaje}</span></p>
     </div>
   );
 };
