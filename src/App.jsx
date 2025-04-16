@@ -38,6 +38,7 @@ const App = () => {
       <Ingresousuario user={user} onChange={actualizauser} />
       <Ingresopass pass={pass} mostrar={mostrar} onChange={actualizapass} visibilidad={mostrarpass} />
       <Indicafuerza fuerza={evaluarfuerza(pass)} />
+      <button className="botonregistro">Registrar usuario</button>
     </div>
   );
 };
