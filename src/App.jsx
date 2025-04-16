@@ -26,8 +26,8 @@ const App = () => {
   if(/[A-Z]/.test(pass)) fuerza++;
   if(/[\d]/.test(pass)) fuerza++;
 
-  if (fuerza <= 2) return 'poco';
-  if (fuerza === 3 || fuerza === 4) return 'media';
+  if (fuerza === 1) return 'poco';
+  if (fuerza === 2 || fuerza === 3) return 'media';
   return 'alta';
 
   };
